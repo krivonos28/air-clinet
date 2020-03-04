@@ -5,7 +5,7 @@ import { Popconfirm } from 'antd';
 export const columns = [
     {
         title: 'Airport ID',
-        dataIndex: 'airportId',
+        dataIndex: 'airport_id',
         editable: true,
         defaultValue: 'none',
       },

@@ -14,12 +14,29 @@ export const AirportsTable = () => {
         }
         fetchData();
     }, [])
+    const saveData = async (row) => {
+        console.log('save dasta ', row);
+        const { data } = await axios.put("http://localhost:3001/airports/", {
+                ...row
+            })
+    }
+    const handleSave = (row) => {
+        saveData(row);
+        const newData = [...airports];
+        const index = newData.findIndex(item => row.key === item.key);
+        const item = newData[index];
+        newData.splice(index, 1, { ...item, ...row });
+        console.log('newdata', newData)
+        setAirports(newData)
+    }
+
     return (
         <div>
             airports table
             <EditableTable
                 columns={columns}
                 data={airports}
+                handleSave={handleSave}
             />
         </div>
     )

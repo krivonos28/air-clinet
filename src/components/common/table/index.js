@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Table, Input, Button, Form } from 'antd';
-import './style.css'
 
 const EditableContext = React.createContext();
 
@@ -90,23 +89,14 @@ class EditableTable extends React.Component {
     this.columns = this.props.columns;
     this.state = { dataSource: this.props.data };
   }
-  componentDidMount() {
-      this.setState((state, props) => {
-          return { dataSource: props.data }
-      })
-      console.log(this.props.data)
-      console.log(this.state)
-  }
 
-  shouldComponentUpdate(){
-    return true;
-  }
-  getSnapshotBeforeUpdate(props, state){
-      console.log('props',props);
-      console.log('state',state);
-      return true
+  // static getDerivedStateFromProps(nextProps, prevState){
+  //     console.log('getSnapshotBeforeUpdate nextProps',nextProps);
+  //     console.log('getSnapshotBeforeUpdate prevState', prevState);
+  //     return !prevState.lengths ? { ...prevState, dataSource: nextProps.data } : null
+      
+  // }
 
-  }
   handleDelete = key => {
     // const dataSource = [...this.state.dataSource];
     // this.setState({
@@ -128,19 +118,21 @@ class EditableTable extends React.Component {
     });
   };
 
-  handleSave = row => {
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex(item => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, { ...item, ...row });
-    this.setState({
-      dataSource: newData,
-    });
-  };
+  // handleSave = row => {
+  //   console.log(row)
+  //     const newData = [...this.state.dataSource];
+  //     const index = newData.findIndex(item => row.key === item.key);
+  //     const item = newData[index];
+  //     newData.splice(index, 1, { ...item, ...row });
+  //     console.log('newdata', newData)
+  //     this.setState({
+  //       dataSource: newData,
+  //     });
+  // };
 
   render() {
-    console.log('render', this.state)
-    const { data: dataSource } = this.props;
+    console.log(this.props);
+    const { handleSave, data: dataSource } = this.props;
     const components = {
       body: {
         row: EditableRow,
@@ -159,7 +151,7 @@ class EditableTable extends React.Component {
           editable: col.editable,
           dataIndex: col.dataIndex,
           title: col.title,
-          handleSave: this.handleSave,
+          handleSave: handleSave,
         }),
       };
     });
@@ -172,7 +164,7 @@ class EditableTable extends React.Component {
           bordered
           dataSource={dataSource}
           columns={columns}
-        //   rowKey={}
+          // rowKey={airportid}
         />
           <Button
           onClick={this.handleAdd}
