@@ -90,19 +90,14 @@ class EditableTable extends React.Component {
     this.state = { dataSource: this.props.data };
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState){
-  //     console.log('getSnapshotBeforeUpdate nextProps',nextProps);
-  //     console.log('getSnapshotBeforeUpdate prevState', prevState);
-  //     return !prevState.lengths ? { ...prevState, dataSource: nextProps.data } : null
-      
-  // }
 
-  handleDelete = key => {
-    // const dataSource = [...this.state.dataSource];
-    // this.setState({
-    //   dataSource: dataSource.filter(item => item.key !== key),
-    // });
-  };
+  // handleDelete = key => {
+  //   console.log(key);
+  //   // const dataSource = [...this.state.dataSource];
+  //   // this.setState({
+  //   //   dataSource: dataSource.filter(item => item.key !== key),
+  //   // });
+  // };
 
   handleAdd = () => {
     const { count, dataSource } = this.state;
@@ -117,18 +112,6 @@ class EditableTable extends React.Component {
       count: count + 1,
     });
   };
-
-  // handleSave = row => {
-  //   console.log(row)
-  //     const newData = [...this.state.dataSource];
-  //     const index = newData.findIndex(item => row.key === item.key);
-  //     const item = newData[index];
-  //     newData.splice(index, 1, { ...item, ...row });
-  //     console.log('newdata', newData)
-  //     this.setState({
-  //       dataSource: newData,
-  //     });
-  // };
 
   render() {
     console.log(this.props);
@@ -164,7 +147,6 @@ class EditableTable extends React.Component {
           bordered
           dataSource={dataSource}
           columns={columns}
-          // rowKey={airportid}
         />
           <Button
           onClick={this.handleAdd}
